@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
 	libevent-dev \
 	libevent-2.0-5 \
 	libexpat1-dev \
-	dnsutils \
-	&& wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
+	dnsutils
+RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
 	&& tar -xvf unbound-${VERSION}.tar.gz \
 	&& rm unbound-${VERSION}.tar.gz \
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y \
 	&& make \
 	&& make install \
 	&& cd ../ \
-	&& rm -R unbound-${VERSION} \
-	&& apt-get purge -y \
+	&& rm -R unbound-${VERSION}
+RUN apt-get purge -y \
 	build-essential \
 	gcc \
 	gcc-4.8 \
