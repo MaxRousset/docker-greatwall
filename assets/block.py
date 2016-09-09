@@ -7,6 +7,7 @@ import wget, os, glob
 # Trash old files if exist
 try:
     os.remove("dns.txt")
+    os.remove("unbound.conf")
 except OSError:
     pass
 
@@ -42,6 +43,11 @@ for ligne  in open("hosts"):
 
 for ligne  in open("z.txt"):
 	unbound_conf.write(ligne)
+
+try:
+    os.remove("dns.txt")
+except OSError:
+    pass
 
 #~ os.remove("hosts")
 #~ a = str(open("a.txt"))

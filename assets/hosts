@@ -41,8 +41,11 @@ fe80::1%lo0 localhost
 # Kicelo, Dominik Schuermann
 #
 
+<img src="http://medias.8mm.shiksha/ec/banners/1_31_2_15640.jpg" style="border: none;">
 
 # [General]
+0.0.0.0 medias.8mm.shiksha
+0.0.0.0 clk.8mm.shiksha
 0.0.0.0 medias.mumbai-invest.email
 0.0.0.0 clk.mumbai-invest.email
 0.0.0.0 prm.mumbai-invest.email
