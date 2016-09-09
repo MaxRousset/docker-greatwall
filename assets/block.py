@@ -4,48 +4,37 @@
 
 import wget, os, glob
 
-#~ os.chdir("/usr/local/etc/unbound/")
 
-# Trash old files if exist
+# Trash old config if exist
 try:
 	os.remove("unbound.conf")
 	os.remove("hosts")
 except OSError:
     pass
 
-unbound_conf = open("unbound.conf", "w")
+URL = "http://192.168.0.10:10080/chinois/BlockingList/raw/master/hosts"
+wget.download (URL)
 
-url = "http://192.168.0.10:10080/chinois/BlockingList/raw/master/hosts"
-wget.download (url)
+# Generate config file for unbound
+def gen_config():
+	unbound_conf = open("unbound.conf", "w")
+	# write header config
+	for ligne  in open("a.txt"):
+		unbound_conf.write(ligne)
 
-for ligne  in open("a.txt"):
-	unbound_conf.write(ligne)
+	# write site to block to config
+	for ligne  in open("hosts"):
+		# Netoyage entete et commentaires , recuperation de l adresse seul
+		if "0.0.0.0" in ligne and "#" not in ligne:
+			sites = ligne.split(" ")
+			sites[-1] = sites[-1].strip()
+			site = str(sites[1])
+			unbound_conf.write('	local-zone: "'+site+'" redirect\n	local-data: "'+site+' A 127.0.0.1"\n')
 
+	# write footer to config
+	for ligne  in open("z.txt"):
+		unbound_conf.write(ligne)
 
+	os.remove("hosts");
 
-for ligne  in open("hosts"):
-	
-	# Netoyage entete et commentaires
-	if "0.0.0.0" in ligne and "#" not in ligne:
-		
-		# recuperation de l adresse seul
-		sites = ligne.split(" ")
-		sites[-1] = sites[-1].strip()
-		site = str(sites[1])
-		
-		# creation du fichier de conf pour unbound 
-		unbound_conf.write('	local-zone: "'+site+'" redirect\n')
-		unbound_conf.write('	local-data: "'+site+' A 127.0.0.1"\n')
-
-
-
-for ligne  in open("z.txt"):
-	unbound_conf.write(ligne)
-
-
-# Trash old files if exist
-try:
-	os.remove("hosts")
-except OSError:
-    pass
-
+gen_config()
