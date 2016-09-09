@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM debian:stable
 MAINTAINER patrick@oberdorf.net
 
 ENV VERSION 1.5.9
@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
 	libevent-dev \
 	libevent-2.0-5 \
 	libexpat1-dev \
-	dnsutils
+	dnsutils \
+	python3-pip
+
 RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
 	&& tar -xvf unbound-${VERSION}.tar.gz \
@@ -25,6 +27,7 @@ RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/loca
 	&& make install \
 	&& cd ../ \
 	&& rm -R unbound-${VERSION}
+RUN pip3 install wget
 RUN apt-get purge -y \
 	build-essential \
 	gcc \
@@ -37,10 +40,14 @@ RUN apt-get purge -y \
 RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
-ADD assets/unbound.conf /usr/local/etc/unbound/unbound.conf
-RUN chown -R unbound:unbound /usr/local/etc/unbound/
+ADD assets/a.txt /usr/local/etc/unbound/a.txt
+ADD assets/z.txt /usr/local/etc/unbound/z.txt
+ADD assets/block.py /usr/local/etc/unbound/block.py
+RUN chown -R unbound:unbound /usr/local/etc/unbound/ \
+	&& chmod +x /usr/local/etc/unbound/block.py
 
 USER unbound
+RUN cd /usr/local/etc/unbound/ && python3 block.py
 RUN unbound-anchor -a /usr/local/etc/unbound/root.key ; true
 RUN unbound-control-setup \
 	&& wget ftp://FTP.INTERNIC.NET/domain/named.cache -O /usr/local/etc/unbound/root.hints
