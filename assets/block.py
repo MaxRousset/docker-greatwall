@@ -2,23 +2,30 @@
 # -*- coding: utf-8 -*-
 
 
-import wget, os, glob
+import wget, os, glob, sys
 
 
-# Trash old config if exist
+""" Go to working directory """
+pathname = os.path.dirname(sys.argv[0])
+os.chdir(os.path.abspath(pathname))
+
+
+""" Trash old config if exist """
 try:
 	os.remove("unbound.conf")
 	os.remove("hosts")
 except OSError:
     pass
 
+""" Get hosts files """
 URL = "http://192.168.0.10:10080/chinois/BlockingList/raw/master/hosts"
 wget.download (URL)
 
 
-# Generate config file for unbound
+""" Generate config file for unbound """
 def gen_config():
 	unbound_conf = open("unbound.conf", "w")
+
 	# write header config
 	for ligne  in open("a.txt"):
 		unbound_conf.write(ligne)
@@ -36,7 +43,8 @@ def gen_config():
 	for ligne  in open("z.txt"):
 		unbound_conf.write(ligne)
 
-	os.remove("hosts");
+	os.remove("hosts")
+	print ("\nConfig generate !");
 
-    
+
 gen_config()
