@@ -36,5 +36,6 @@ def gen_config():
 		unbound_conf.write(ligne)
 
 	os.remove("hosts");
+    
 
 gen_config()
