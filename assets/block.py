@@ -15,6 +15,7 @@ except OSError:
 URL = "http://192.168.0.10:10080/chinois/BlockingList/raw/master/hosts"
 wget.download (URL)
 
+
 # Generate config file for unbound
 def gen_config():
 	unbound_conf = open("unbound.conf", "w")
@@ -36,6 +37,6 @@ def gen_config():
 		unbound_conf.write(ligne)
 
 	os.remove("hosts");
-    
 
+    
 gen_config()
