@@ -37,4 +37,5 @@ def gen_config():
 
 	os.remove("hosts");
     
+    
 gen_config()
