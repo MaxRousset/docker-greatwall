@@ -44,7 +44,7 @@ def gen_config():
 		unbound_conf.write(ligne)
 
 	os.remove("hosts")
-	print ("\nConfig generate !");
+	print ("\nConfig generated !");
 
 
 gen_config()
