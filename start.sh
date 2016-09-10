@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 DO_IPV6=${DO_IPV6:-yes}
 DO_IPV4=${DO_IPV4:-yes}
 DO_UDP=${DO_UDP:-yes}
@@ -22,7 +23,8 @@ STATISTICS_CUMULATIVE=${STATISTICS_CUMULATIVE:-no}
 EXTENDED_STATISTICS=${EXTENDED_STATISTICS:-no}
 INTERFACE=${INTERFACE:-0.0.0.0}
 
-
+cd /usr/local/etc/unbound/
+python3 block.py
 sed 's/{{DO_IPV6}}/'"${DO_IPV6}"'/' -i /usr/local/etc/unbound/unbound.conf
 sed 's/{{DO_IPV4}}/'"${DO_IPV4}"'/' -i /usr/local/etc/unbound/unbound.conf
 sed 's/{{DO_UDP}}/'"${DO_UDP}"'/' -i /usr/local/etc/unbound/unbound.conf
