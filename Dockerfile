@@ -36,7 +36,7 @@ RUN apt-get purge -y \
 	cpp-4.8 \
 	libssl-dev \
 	libevent-dev \
-	libexpat1-dev 
+	libexpat1-dev
 RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
@@ -47,7 +47,6 @@ RUN chown -R unbound:unbound /usr/local/etc/unbound/ \
 	&& chmod +x /usr/local/etc/unbound/block.py
 
 USER unbound
-RUN cd /usr/local/etc/unbound/ && python3 block.py
 RUN unbound-anchor -a /usr/local/etc/unbound/root.key ; true
 RUN unbound-control-setup \
 	&& wget ftp://FTP.INTERNIC.NET/domain/named.cache -O /usr/local/etc/unbound/root.hints
