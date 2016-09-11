@@ -3,7 +3,9 @@ Unbound (with DNSSEC validation and blocking sites)
 
 Fork from https://github.com/obi12341/docker-unbound
 
-Default hosts file from https://github.com/StevenBlack/hosts
+The list of hosts blocked is set from a hosts file
+
+Default hosts file from https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
 
 If you dont want blocking properties just use :
     
@@ -27,7 +29,7 @@ If you want to override the nameserver in the unbound container, you can use:
 
 # Configuration
 These options can be set via the environment variable -e flag:
-- **HOSTS_URL**: Set the hosts file url to chose what to block (Default: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts")
+- **HOSTS_URL**: Set the hosts file url. (Default: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts")
 - **DO_IPV6**: Enable or disable ipv6. (Default: "yes", Possible Values: "yes, no")
 - **DO_IPV4**: Enable or disable ipv4. (Default: "yes", Possible Values: "yes, no")
 - **DO_UDP**: Enable or disable udp. (Default: "yes", Possible Values: "yes, no")
