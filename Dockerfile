@@ -1,5 +1,5 @@
 FROM debian:stable
-MAINTAINER patrick@oberdorf.net
+MAINTAINER maxencerousset717@gmail.com
 
 ENV VERSION 1.5.9
 
@@ -40,8 +40,8 @@ RUN apt-get purge -y \
 RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
-ADD assets/a.txt /usr/local/etc/unbound/a.txt
-ADD assets/z.txt /usr/local/etc/unbound/z.txt
+ADD assets/header.conf /usr/local/etc/unbound/header.conf
+ADD assets/footer.conf /usr/local/etc/unbound/footer.conf
 ADD assets/block.py /usr/local/etc/unbound/block.py
 RUN chown -R unbound:unbound /usr/local/etc/unbound/ \
 	&& chmod +x /usr/local/etc/unbound/block.py
