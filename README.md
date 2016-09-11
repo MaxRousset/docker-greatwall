@@ -20,7 +20,7 @@ Just use this command to start the container. Unbound will listen on port 53/udp
 (optional)
 Set your own hosts file url to chose what to block
 
-```docker run -d -p 53:53/udp -p 53:53 -e HOSTS_URL:http://your.url  justtolaunch/unbound-greatwall```
+```docker run -d -p 53:53/udp -p 53:53 -e HOSTS_URL=http://your.url  justtolaunch/unbound-greatwall```
 
 (optional)
 If you want to override the nameserver in the unbound container, you can use:
