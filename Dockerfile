@@ -6,7 +6,7 @@ ENV VERSION 1.5.9
 WORKDIR /usr/local/src/
 ADD assets/sha256checksum sha256checksum
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -qy \
 	build-essential \
 	tar \
 	wget \
