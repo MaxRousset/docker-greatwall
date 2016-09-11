@@ -18,7 +18,7 @@ except OSError:
     pass
 
 """ Get hosts files """
-URL = "http://192.168.0.10:10080/chinois/BlockingList/raw/master/hosts"
+URL = str(sys.argv[1])
 wget.download (URL)
 
 

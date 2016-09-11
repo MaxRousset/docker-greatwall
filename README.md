@@ -11,6 +11,10 @@ Just use this command to start the container. Unbound will listen on port 53/udp
 
 ```docker run --name unbound -d -p 53:53/udp -p 53:53 chinois/unbound```
 
+Set your own hosts file to chosse what to block
+
+```docker run --name unbound -d -p 53:53/udp -p 53:53 -e HOSTS_URL:http://your.url  chinois/unbound```
+
 (optional)
 If you want to override the nameserver in the unbound container, you can use:
 
@@ -18,7 +22,7 @@ If you want to override the nameserver in the unbound container, you can use:
 
 # Configuration
 These options can be set via the environment variable -e flag:
-
+- **HOSTS_URL**: Set the hosts file url to chose what to block (Default: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts")
 - **DO_IPV6**: Enable or disable ipv6. (Default: "yes", Possible Values: "yes, no")
 - **DO_IPV4**: Enable or disable ipv4. (Default: "yes", Possible Values: "yes, no")
 - **DO_UDP**: Enable or disable udp. (Default: "yes", Possible Values: "yes, no")
