@@ -1,1 +1,1 @@
-docker build -t chinois/unbound .
+docker build -t chinois/unbound-greatwall .

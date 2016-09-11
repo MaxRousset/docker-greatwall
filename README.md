@@ -1,9 +1,13 @@
-Unbound (with DNSSEC validation)
+Unbound (with DNSSEC validation and blocking sites)
 ===========
 
 Fork from https://github.com/obi12341/docker-unbound
 
-Hosts file from https://github.com/StevenBlack/hosts
+Default hosts file from https://github.com/StevenBlack/hosts
+
+If you dont want blocking properties just use :
+    
+    https://github.com/obi12341/docker-unbound
 
 # Running
 
@@ -11,7 +15,8 @@ Just use this command to start the container. Unbound will listen on port 53/udp
 
 ```docker run --name unbound -d -p 53:53/udp -p 53:53 chinois/unbound```
 
-Set your own hosts file to chosse what to block
+(optional)
+Set your own hosts file url to chose what to block
 
 ```docker run --name unbound -d -p 53:53/udp -p 53:53 -e HOSTS_URL:http://your.url  chinois/unbound```
 
