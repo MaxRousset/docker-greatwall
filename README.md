@@ -18,6 +18,8 @@ You can find various hosts file :
 
     https://github.com/StevenBlack/hosts
 
+For now you can only use hosts file fomated with 0.0.0.0 not 127.0.0.1
+
 
 # Running
 
