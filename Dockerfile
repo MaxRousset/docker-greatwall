@@ -15,9 +15,8 @@ RUN apt-get update && apt-get install -qy \
 	libevent-2.0-5 \
 	libexpat1-dev \
 	dnsutils \
-	python3-pip
-
-RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
+	python3-pip \
+	&& wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
 	&& tar -xvf unbound-${VERSION}.tar.gz \
 	&& rm unbound-${VERSION}.tar.gz \
@@ -26,9 +25,8 @@ RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/loca
 	&& make \
 	&& make install \
 	&& cd ../ \
-	&& rm -R unbound-${VERSION}
-RUN pip3 install wget
-RUN apt-get purge -y \
+	&& rm -R unbound-${VERSION} \
+	&& apt-get purge -y \
 	build-essential \
 	gcc \
 	gcc-4.8 \
@@ -36,7 +34,12 @@ RUN apt-get purge -y \
 	cpp-4.8 \
 	libssl-dev \
 	libevent-dev \
-	libexpat1-dev
+	libexpat1-dev \
+	&& pip3 install wget \
+	&& apt-get autoremove --purge -y \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
