@@ -2,17 +2,11 @@ Unbound (with DNSSEC validation and blocking sites)
 ===========
 
 Fork from https://github.com/obi12341/docker-unbound
+If you dont want blocking properties just use it !
 
-
+#
 The list of hosts blocked is set from a hosts file
-
 Default hosts file from https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
-
-
-If you dont want blocking properties just use :
-    
-    https://github.com/obi12341/docker-unbound
-
 
 You can find various hosts file :
 
