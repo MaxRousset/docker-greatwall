@@ -1,12 +1,12 @@
-FROM debian:stable
+FROM ubuntu:trusty
 MAINTAINER maxencerousset717@gmail.com
 
-ENV VERSION 1.5.9
+ENV VERSION 1.6.6
 
 WORKDIR /usr/local/src/
 ADD assets/sha256checksum sha256checksum
 
-RUN apt-get update && apt-get install -qy \
+RUN apt-get update && apt-get install -y \
 	build-essential \
 	tar \
 	wget \
@@ -15,8 +15,9 @@ RUN apt-get update && apt-get install -qy \
 	libevent-2.0-5 \
 	libexpat1-dev \
 	dnsutils \
-	python3-pip \
-	&& wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
+    python3-pip
+    
+RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
 	&& tar -xvf unbound-${VERSION}.tar.gz \
 	&& rm unbound-${VERSION}.tar.gz \
@@ -35,7 +36,7 @@ RUN apt-get update && apt-get install -qy \
 	libssl-dev \
 	libevent-dev \
 	libexpat1-dev \
-	&& pip3 install wget \
+    &&  pip3 install wget \
 	&& apt-get autoremove --purge -y \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -43,9 +44,11 @@ RUN apt-get update && apt-get install -qy \
 RUN useradd --system unbound --home /home/unbound --create-home
 ENV PATH $PATH:/usr/local/lib
 RUN ldconfig
+
 ADD assets/header.conf /usr/local/etc/unbound/header.conf
 ADD assets/footer.conf /usr/local/etc/unbound/footer.conf
 ADD assets/block.py /usr/local/etc/unbound/block.py
+RUN mkdir /usr/local/etc/unbound/conf.d
 RUN chown -R unbound:unbound /usr/local/etc/unbound/ \
 	&& chmod +x /usr/local/etc/unbound/block.py
 
