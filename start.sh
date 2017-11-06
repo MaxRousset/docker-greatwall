@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/ash
 
 HOSTS_URL=${HOSTS_URL:-https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts}
 DO_IPV6=${DO_IPV6:-yes}
@@ -24,27 +23,28 @@ STATISTICS_CUMULATIVE=${STATISTICS_CUMULATIVE:-no}
 EXTENDED_STATISTICS=${EXTENDED_STATISTICS:-no}
 INTERFACE=${INTERFACE:-0.0.0.0}
 
-python3 /usr/local/etc/unbound/block.py "${HOSTS_URL}"
+python3 /etc/unbound/block.py "${HOSTS_URL}"
 
-sed 's/{{DO_IPV6}}/'"${DO_IPV6}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{DO_IPV4}}/'"${DO_IPV4}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{DO_UDP}}/'"${DO_UDP}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{DO_TCP}}/'"${DO_TCP}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{VERBOSITY}}/'"${VERBOSITY}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{NUM_THREADS}}/'"${NUM_THREADS}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{SO_RCVBUFF}}/'"${SO_RCVBUFF}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{SO_SNDBUF}}/'"${SO_SNDBUF}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{SO_REUSEPORT}}/'"${SO_REUSEPORT}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{EDNS_BUFFER_SIZE}}/'"${EDNS_BUFFER_SIZE}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{MSG_CACHE_SIZE}}/'"${MSG_CACHE_SIZE}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{RRSET_CACHE_SIZE}}/'"${RRSET_CACHE_SIZE}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{CACHE_MIN_TTL}}/'"${CACHE_MIN_TTL}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{CACHE_MAX_TTL}}/'"${CACHE_MAX_TTL}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{CACHE_MAX_NEGATIVE_TTL}}/'"${CACHE_MAX_NEGATIVE_TTL}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{HIDE_IDENTITY}}/'"${HIDE_IDENTITY}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{HIDE_VERSION}}/'"${HIDE_VERSION}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{STATISTICS_INTERVAL}}/'"${STATISTICS_INTERVAL}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{STATISTICS_CUMULATIVE}}/'"${STATISTICS_CUMULATIVE}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{EXTENDED_STATISTICS}}/'"${EXTENDED_STATISTICS}"'/' -i /usr/local/etc/unbound/unbound.conf
-sed 's/{{INTERFACE}}/'"${INTERFACE}"'/' -i /usr/local/etc/unbound/unbound.conf
-exec /usr/local/sbin/unbound -c /usr/local/etc/unbound/unbound.conf -d -v
+sed 's/{{DO_IPV6}}/'"${DO_IPV6}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{DO_IPV4}}/'"${DO_IPV4}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{DO_UDP}}/'"${DO_UDP}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{DO_TCP}}/'"${DO_TCP}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{VERBOSITY}}/'"${VERBOSITY}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{NUM_THREADS}}/'"${NUM_THREADS}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{SO_RCVBUFF}}/'"${SO_RCVBUFF}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{SO_SNDBUF}}/'"${SO_SNDBUF}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{SO_REUSEPORT}}/'"${SO_REUSEPORT}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{EDNS_BUFFER_SIZE}}/'"${EDNS_BUFFER_SIZE}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{MSG_CACHE_SIZE}}/'"${MSG_CACHE_SIZE}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{RRSET_CACHE_SIZE}}/'"${RRSET_CACHE_SIZE}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{CACHE_MIN_TTL}}/'"${CACHE_MIN_TTL}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{CACHE_MAX_TTL}}/'"${CACHE_MAX_TTL}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{CACHE_MAX_NEGATIVE_TTL}}/'"${CACHE_MAX_NEGATIVE_TTL}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{HIDE_IDENTITY}}/'"${HIDE_IDENTITY}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{HIDE_VERSION}}/'"${HIDE_VERSION}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{STATISTICS_INTERVAL}}/'"${STATISTICS_INTERVAL}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{STATISTICS_CUMULATIVE}}/'"${STATISTICS_CUMULATIVE}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{EXTENDED_STATISTICS}}/'"${EXTENDED_STATISTICS}"'/' -i /etc/unbound/unbound.conf
+sed 's/{{INTERFACE}}/'"${INTERFACE}"'/' -i /etc/unbound/unbound.conf
+
+unbound -c /etc/unbound/unbound.conf -d -v

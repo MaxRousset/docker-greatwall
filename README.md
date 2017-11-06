@@ -1,12 +1,15 @@
 Unbound (with DNSSEC validation and blocking sites)
 ===========
 
+Based on alpine linux
+
 Fork from https://github.com/obi12341/docker-unbound
 If you dont want blocking properties just use it !
 
-#
 The list of hosts blocked is set from a hosts file
-Default hosts file from https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
+Default hosts file from :
+
+    https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
 
 You can find various hosts file :
 
@@ -19,7 +22,7 @@ For now you can only use hosts file fomated with 0.0.0.0 not 127.0.0.1
 
 Just use this command to start the container. Unbound will listen on port 53/udp.
 
-```docker run -d -p 53:53/udp -p 53:53 justtolaunch/unbound-greatwall``
+```docker run -d -p 53:53/udp -p 53:53 justtolaunch/unbound-greatwall```
 
 (optional)
 Set your own hosts file url to chose what to block
