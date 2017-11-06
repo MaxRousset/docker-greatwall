@@ -36,7 +36,7 @@ RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/loca
 	libssl-dev \
 	libevent-dev \
 	libexpat1-dev \
-	&&  pip3 install wget \
+	&& pip3 install wget \
 	&& apt-get autoremove --purge -y \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
