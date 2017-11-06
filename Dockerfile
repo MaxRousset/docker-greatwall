@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 	libevent-2.0-5 \
 	libexpat1-dev \
 	dnsutils \
-    python3-pip
+	python3-pip
     
 RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/local/src/ \
 	&& sha256sum -c sha256checksum \
@@ -36,7 +36,7 @@ RUN wget http://www.unbound.net/downloads/unbound-${VERSION}.tar.gz -P /usr/loca
 	libssl-dev \
 	libevent-dev \
 	libexpat1-dev \
-    &&  pip3 install wget \
+	&&  pip3 install wget \
 	&& apt-get autoremove --purge -y \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
