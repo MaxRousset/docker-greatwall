@@ -1,5 +1,4 @@
 FROM ubuntu:trusty
-MAINTAINER maxencerousset717@gmail.com
 
 ENV VERSION 1.6.6
 
