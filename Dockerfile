@@ -17,8 +17,7 @@ RUN chown -R unbound:unbound /etc/unbound/
 
 USER unbound
 RUN unbound-anchor -a /etc/unbound/root.key ; true
-RUN unbound-control-setup \
-	&& wget ftp://FTP.INTERNIC.NET/domain/named.cache -O /etc/unbound/root.hints
+RUN unbound-control-setup 
 
 USER root
 ADD start.sh /start.sh
