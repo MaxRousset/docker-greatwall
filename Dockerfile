@@ -3,9 +3,10 @@ FROM alpine
 ENV VERSION 1.6.6
 
 RUN apk add --no-cache python3 \
-	wget \
-	openssl \
-	unbound
+        py3-pip \
+        wget \
+        openssl \
+        unbound
     
 RUN pip3 install wget
 
